@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import { useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { Routes, Route, useNavigate, Link} from 'react-router-dom';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
+import { selectUserContacts } from './Store/User/selectors';
+import { selectTheme } from './Store/User/selectors';
+import { RegistrForm } from './Components/RegistrForm/RegistrForm';
+import { Header } from './Components/Header/Header';
 
-function App() {
+
+export const App = () => {
+  const user = useSelector(selectUserContacts);
+  const currentTheme = useSelector(selectTheme);
+
+  const mainTheme = useMemo(() => createTheme({
+    palette:{
+      mode: currentTheme,
+    }
+  }), [currentTheme]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ThemeProvider theme={mainTheme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <div id={currentTheme}>
+            <Routes>
+              <Route path="/*" element={< RegistrForm />} />
+              <Route path='/:form' element={< RegistrForm />} />
+              <Route path='/user/*' element={< Header />} />
+            </Routes>
+          </div>
+      </LocalizationProvider>
+      </ThemeProvider>
     </div>
   );
 }
 
-export default App;

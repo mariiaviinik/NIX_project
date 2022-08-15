@@ -1,0 +1,1 @@
+export const selectAutocompleteDt = (state) => state.autocompleteDt.autocompleteDt;

@@ -1,0 +1,18 @@
+.flex{
+    display: flex;
+}
+.weather-icon{
+    width: 90px;
+    height: 90px;
+}
+.centralize-row{
+    display: flex;
+    justify-content: center;
+}
+.centralize-column{
+    align-items: center;
+}
+.temperature{
+    font-size: 30px;
+    margin: 0;
+}

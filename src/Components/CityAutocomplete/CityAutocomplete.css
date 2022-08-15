@@ -1,0 +1,23 @@
+.show{
+    display: block;
+    position: absolute;
+    z-index: 10;
+    padding: 0;
+    margin-Top: 0;
+    background-color: white;
+}
+
+.show>li{
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.show>li:hover{
+    background-color: rgb(221, 218, 218);
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
