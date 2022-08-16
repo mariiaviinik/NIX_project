@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ListItemText } from '@mui/material';
+import { ListItemText, ListItem } from '@mui/material';
 import { selectFavCities } from '../../Store/User/selectors';
 import { deleteFavouriteCityAction } from '../../Store/User/actions';
 import { useNavigate } from "react-router-dom";
@@ -25,10 +25,10 @@ export const FavCities = ({ onCityClick }) => {
         {
           cities.map((city, index) => { 
             return (
-              <li key={index} >
+              <ListItem  key={index} >
                 <ListItemText onClick={onLiClick} primary={city} />
                 <button onClick={()=>{onCityDelete(index)}}>delete</button>
-              </li>
+              </ListItem >
             );
           })
         }

@@ -33,7 +33,7 @@ export const userReducer = (state=initialState, action) => {
                 }
             }
         case ADD_SPORT_EVENT_ACTION:
-            return { ...state, settings: {...state.settings, savedSportEvents: [...state.settings.savedSportEvents, action.city ]}}
+            return { ...state, settings: {...state.settings, savedSportEvents: [...state.settings.savedSportEvents, action.sportEvent ]}}
         case DELETE_SPORT_EVENT_ACTION:
             return { ...state, settings: 
                 {...state.settings,

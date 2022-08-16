@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useComponentVisible } from './useComponentVisible';
 import debounce from 'lodash.debounce';
 import {
-  Checkbox,
+  ListItem ,
   ListItemText,
   TextField
 } from '@mui/material';
@@ -16,8 +17,9 @@ import { addFavouriteCityAction } from '../../Store/User/actions';
 export const CityAutocomplete = ({text}) => {
 
   const AutocompleteDt = useSelector(selectAutocompleteDt);
-  const [isActive, setIsActive] = useState();
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
   const [inputVal, setInputVal] = useState('');
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,24 +35,24 @@ export const CityAutocomplete = ({text}) => {
   const dispatchParam = useCallback((e)=>{   
     const val = e.target.value;
     if(val){
-      setIsActive(true);
+      setIsComponentVisible(true);
       dispatch(getAutocompleteDt(val));
     } else{
-      setIsActive(false);
+      setIsComponentVisible(false);
     }
-  }, [dispatch]);
+  }, [dispatch, setIsComponentVisible]);
   
   const debouncedOnChange =  debounce(dispatchParam, 300);
 
   const onLiClick = useCallback((e)=>{
     let inputVal = e.target.innerText.split(", ").shift();
-
     navigate(inputVal + '/current');
-    setIsActive(false);
-  }, [navigate, setIsActive])
+    setIsComponentVisible(false);
+    setInputVal('');
+  }, [navigate, setIsComponentVisible, setInputVal])
 
   return (
-    <div>    
+    <div ref={ref}>  
       <TextField 
         type='text'
         value={inputVal}
@@ -63,18 +65,23 @@ export const CityAutocomplete = ({text}) => {
         size='small'
         autoComplete='off'
       />
-      <ul className={isActive ? 'show' : 'hide'}>
-        {
-          AutocompleteDt.map((option) => { 
-            return (
-              <li key={option.id} >
-                <ListItemText onClick={onLiClick}  id={option.id} primary={[option.name, option.region, option.country].join(', ')} />
-                <button onClick={() => {addFavCity(option.name)}}>add</button>
-              </li>
-            );
-          })
-        }
-      </ul>
+      {
+        isComponentVisible
+        ?
+        <ul className='search'>
+          {
+            AutocompleteDt.map((option) => { 
+              return (
+                <li key={option.id} >
+                  <ListItemText onClick={onLiClick}  id={option.id} primary={[option.name, option.region, option.country].join(', ')} />
+                  <button onClick={() => {addFavCity(option.name)}}>add</button>
+                </li>
+              );
+            })
+          }
+        </ul>
+        : null
+      }
     </div>
   );
 }

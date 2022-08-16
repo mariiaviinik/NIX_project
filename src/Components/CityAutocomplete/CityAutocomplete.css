@@ -1,4 +1,4 @@
-.show{
+.search{
     display: block;
     position: absolute;
     z-index: 10;
@@ -7,17 +7,13 @@
     background-color: white;
 }
 
-.show>li{
+.search>li{
     display: flex;
     align-items: center;
     padding: 2px;
 }
 
-.show>li:hover{
+.search>li:hover{
     background-color: rgb(221, 218, 218);
     cursor: pointer;
-}
-
-.hide{
-    display: none;
 }

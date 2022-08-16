@@ -9,7 +9,7 @@ import { CityAutocomplete } from '../CityAutocomplete/CityAutocomplete';
 import { Settings } from '../Settings/Settings';
 import { CurrentWeather } from '../CurrentWeather/CurrentWeather';
 import { ForecastList } from '../ForecastList/ForecastList';
-import { SportEvents } from '../SportEvents/SportEvents';
+import { SportEventsList } from '../SportEventsList/SportEventsList';
 import { FavCities } from '../FavCities/FavCities';
 import { History } from '../History/History';
 
@@ -48,7 +48,7 @@ export const Header = () => {
                 <Route path='/:cityName/current' element={< CurrentWeather />} />
                 <Route path='/:cityName/forecast' element={< ForecastList />} />
                 <Route path='/:cityName/history/*' element={< History />} />
-                <Route path='/:cityName/sportEvents' element={< SportEvents />} />
+                <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
             </Routes>
         </div>
     )

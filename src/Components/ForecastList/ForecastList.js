@@ -10,22 +10,18 @@ export const ForecastList = () => {
     const forecastDt = useSelector(selectForecastDt);
     const {cityName} = useParams();
 
-    const onListClick = useCallback(
-        
-    )
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(cityName && !forecastDt.length){
+        if(cityName){
             dispatch(getWeatherForecast(cityName));
         }
-    }, [dispatch, cityName, forecastDt]);
+    }, [dispatch, cityName]);
 
 
     return(
-        <div className='centralize-column column' onClick={onListClick}>
+        <div className='centralize-column column'>
             {
                 forecastDt.map((item, index) => { 
                     return (

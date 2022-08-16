@@ -31,10 +31,10 @@ export const CurrentWeather = () =>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(cityName && !currentWeatherLength){
+        if(cityName){
             dispatch(getWeatherForecast(cityName));
         }
-    }, [dispatch, cityName, currentWeather]);
+    }, [dispatch, cityName]);
     
 
     return(
