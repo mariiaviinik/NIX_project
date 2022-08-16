@@ -1,7 +1,7 @@
 import './Header.css' ;
-import { useState, useCallback, useEffect } from 'react';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { translation } from '../../translation';
 import { selectLang } from '../../Store/User/selectors';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
@@ -49,6 +49,7 @@ export const Header = () => {
                 <Route path='/:cityName/forecast' element={< ForecastList />} />
                 <Route path='/:cityName/history/*' element={< History />} />
                 <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
+                <Route path='/savedEvents' element={< SportEventsList />} />
             </Routes>
         </div>
     )

@@ -6,14 +6,21 @@ import {
 } from '@mui/material';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSportEventAction } from '../../Store/User/actions';
+import { useParams } from 'react-router-dom';
+import { addSportEventAction, deleteSportEventAction } from '../../Store/User/actions';
 
 
-export const SportEvent = ({ dt }) => {
+export const SportEvent = ({ dt, typeIndex }) => {
+    const {cityName} = useParams();
+
     const dispatch = useDispatch();
 
-    const onEventSave = useCallback((item)=>{
-        dispatch(addSportEventAction(item));
+    const onEventSave = useCallback((sportItem, index)=>{
+        dispatch(addSportEventAction(sportItem, index));
+    }, [dispatch])
+
+    const onEventDelete = useCallback((typeIndex, eventIndex)=>{
+        dispatch(deleteSportEventAction(typeIndex, eventIndex));
     }, [dispatch])
 
     return(
@@ -33,7 +40,13 @@ export const SportEvent = ({ dt }) => {
                                 <p>{sportEvent.start.split(' ')[1]}</p>
                             </TableCell>
                             <TableCell>
-                                <Button onClick={()=>{onEventSave(sportEvent)}}>Add</Button>
+                                {
+                                    cityName
+                                    ?
+                                    <Button onClick={()=>{onEventSave(sportEvent, typeIndex)}}>Add</Button>
+                                    :
+                                    <Button onClick={()=>{onEventDelete(typeIndex, index)}}>Delete</Button>
+                                }
                             </TableCell>
                         </TableRow>
                     )

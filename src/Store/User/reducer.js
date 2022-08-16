@@ -14,7 +14,7 @@ const initialState = {
     contacts: {},
     settings: {
         cities: [],
-        savedSportEvents: [],
+        savedSportEvents: [[], [], []],
         theme: 'light',
         lang: 'en',
     }
@@ -33,11 +33,17 @@ export const userReducer = (state=initialState, action) => {
                 }
             }
         case ADD_SPORT_EVENT_ACTION:
-            return { ...state, settings: {...state.settings, savedSportEvents: [...state.settings.savedSportEvents, action.sportEvent ]}}
+            state.settings.savedSportEvents[action.index] = [...state.settings.savedSportEvents[action.index], action.sportEvent]
+            return { ...state, settings: 
+                {...state.settings, 
+                    savedSportEvents:  [...state.settings.savedSportEvents]
+                }
+            }
         case DELETE_SPORT_EVENT_ACTION:
+            state.settings.savedSportEvents[action.typeIndex] = state.settings.savedSportEvents[action.typeIndex].filter((sport, index) => action.eventIndex !== index)
             return { ...state, settings: 
                 {...state.settings,
-                    savedSportEvents: state.settings.savedSportEvents.filter((city, index) => action.index !== index)
+                    savedSportEvents: [...state.settings.savedSportEvents]
                 }
             }
         case CHANGE_LOG_STATUS_ACTION:
@@ -58,7 +64,7 @@ export const userReducer = (state=initialState, action) => {
                     lang: action.lang
                 }
             }
-        case CHANGE_LANGUAGE_ACTION:
+        case CHANGE_SYSTEM_ACTION:
             return { ...state, settings: 
                 {...state.settings,
                     system: action.option

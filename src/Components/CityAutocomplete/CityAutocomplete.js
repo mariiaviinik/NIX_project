@@ -3,11 +3,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useComponentVisible } from './useComponentVisible';
 import debounce from 'lodash.debounce';
-import {
-  ListItem ,
-  ListItemText,
-  TextField
-} from '@mui/material';
+import { ListItemText } from '@mui/material';
 import './CityAutocomplete.css';
 import { selectAutocompleteDt } from '../../Store/Autocomplete/selectors';
 import { getAutocompleteDt } from '../../Store/Autocomplete/thunks';
@@ -53,7 +49,7 @@ export const CityAutocomplete = ({text}) => {
 
   return (
     <div ref={ref}>  
-      <TextField 
+      {/* <TextField 
         type='text'
         value={inputVal}
         onChange={(e)=>{
@@ -64,6 +60,15 @@ export const CityAutocomplete = ({text}) => {
         placeholder={text}
         size='small'
         autoComplete='off'
+      /> */}
+      <input
+        type='text'
+        value={inputVal}
+        placeholder={text}
+        onChange={(e)=>{
+          onInputChange(e);
+          debouncedOnChange(e);
+        }}  
       />
       {
         isComponentVisible

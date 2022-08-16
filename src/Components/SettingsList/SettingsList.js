@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { translation } from '../../translation';
 import { changeLogStatusAction } from '../../Store/User/actions';
-import { selectUserContacts, selectTheme, selectLang } from '../../Store/User/selectors';
+import { selectUserContacts, selectTheme, selectLang, selectSystem } from '../../Store/User/selectors';
 import { changeThemeAction, changeLanguageAction, changeSystemAction } from '../../Store/User/actions';
 
 
@@ -23,9 +23,10 @@ export const SettingsList = ({ onBoxClick }) => {
     const user = useSelector(selectUserContacts);
     const language = useSelector(selectLang);
     const currentTheme = useSelector(selectTheme);
+    const currentSystem = useSelector(selectSystem);
 
     const [lang, setLang]  = useState(translation[language]['settings']);
-    const [selectVal, setselectVal] = useState('en');
+    const [selectThemeVal, setSelectThemeVal] = useState(language);
 
     useEffect(()=>{
         setLang(translation[language]['settings'])
@@ -34,21 +35,25 @@ export const SettingsList = ({ onBoxClick }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const onSportClick = useCallback(()=>{
+        onBoxClick(false);
+        navigate('/user/savedEvents');
+    }, [navigate, onBoxClick]);
+
+    const onLanguageChange = useCallback((e) => {
+        setSelectThemeVal(e.target.value);
+        dispatch(changeLanguageAction(e.target.value));
+    }, [dispatch, setSelectThemeVal])
+
     const changeThemeMode = useCallback((e) => {
         const theme = e.target.checked ? 'dark' : 'light';
         dispatch(changeThemeAction(theme))
-        // onBoxClick(false);
     }, [dispatch]);
 
     const changeSystemMode = useCallback((e) => {
         const system = e.target.checked ? 'metric' : 'imperial';
         dispatch(changeSystemAction(system))
     }, [dispatch]);
-
-    const onLanguageChange = useCallback((e) => {
-        setselectVal(e.target.value);
-        dispatch(changeLanguageAction(e.target.value));
-    }, [dispatch, setselectVal])
 
     const onLogClick = useCallback((status) => {
         onBoxClick(false);
@@ -58,22 +63,21 @@ export const SettingsList = ({ onBoxClick }) => {
         } else {
             dispatch(changeLogStatusAction(true))
         }
-    }, [dispatch])
+    }, [dispatch, navigate, onBoxClick])
     
     return(
         <Box
             sx={{ paddingLeft: 2, width: 250 }}
-            role="presentation"
         >
             <List>
-                <ListItemButton onClick={()=>{}}>
-                    <ListItemText primary='Sport events' />
+                <ListItemButton onClick={onSportClick}>
+                    <ListItemText primary={lang['sport']} />
                 </ListItemButton>
                 <ListItem>
                     <Select
                         labelId="select"
                         id="select"
-                        value={selectVal}
+                        value={selectThemeVal}
                         onChange={onLanguageChange}
                     >
                         <MenuItem value={'en'} >English</MenuItem>
@@ -83,13 +87,13 @@ export const SettingsList = ({ onBoxClick }) => {
                 <ListItem>
                     < FormControlLabel 
                         control={<Switch checked={currentTheme === 'dark' ? true : false} />} 
-                        label={lang['theme']}
-                        onChange={changeThemeMode} 
+                            label={lang['theme']}
+                            onChange={changeThemeMode} 
                     />
                 </ListItem>
                 <ListItem>
                     <FormControlLabel 
-                    control={<Switch />} 
+                    control={<Switch checked={currentSystem === 'Imperial' ? true : false} />} 
                     label={lang['system']}
                     onChange={changeSystemMode} 
                 />

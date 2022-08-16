@@ -26,5 +26,3 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(persistedReducer, applyMiddleware(thunk));
-// store.subscribe(() => {console.log(store.getState())});
-// storage.getItem('persist:users').then((val) => console.log(JSON.parse(JSON.parse(val).users)))

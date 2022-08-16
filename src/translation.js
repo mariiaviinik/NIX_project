@@ -8,8 +8,8 @@ export const translation = {
             sport: 'Спортивні події',
         },
         settings:{
-            sport: 'Спортивні події',
-            system: 'Імперська/ Метрична',
+            sport: 'Збережені спортивні події',
+            system: 'Метрична/Імперська',
             theme: 'Світла/Темна',
             favCities: 'Улюблені міста',
             login: 'Ввійти',
@@ -53,8 +53,8 @@ export const translation = {
             sport: 'Sport events',
         },
         settings:{
-            sport: 'Sport events',
-            system: 'Imperial/ Metric',
+            sport: 'Saved sport events',
+            system: 'Metric/Imperial',
             theme: 'Light/Dark',
             favCities: 'Favourite cities',
             login: 'Log in',

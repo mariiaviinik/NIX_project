@@ -34,17 +34,19 @@ export const deleteFavouriteCityAction = (index) => {
     };
 }
 
-export const addSportEventAction = (sportEvent) => {
+export const addSportEventAction = (sportEvent, index) => {
     return {
         type: ADD_SPORT_EVENT_ACTION,
-        sportEvent
+        sportEvent,
+        index,
     };
 }
 
-export const deleteSportEventAction = (index) => {
+export const deleteSportEventAction = (typeIndex, eventIndex) => {
     return {
         type: DELETE_SPORT_EVENT_ACTION,
-        index
+        typeIndex, 
+        eventIndex,
     };
 }
 
