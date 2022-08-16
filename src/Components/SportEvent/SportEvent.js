@@ -30,6 +30,9 @@ export const SportEvent = ({ dt, typeIndex }) => {
                     return (
                         <TableRow key={index}>
                             <TableCell>
+                                <p>{sportEvent.match}</p>
+                            </TableCell>
+                            <TableCell>
                                 <p>{sportEvent.tournament}</p>
                             </TableCell>
                             <TableCell>

@@ -37,8 +37,8 @@ export const SettingsList = ({ onBoxClick }) => {
 
     const onSportClick = useCallback(()=>{
         onBoxClick(false);
-        navigate('/user/savedEvents');
-    }, [navigate, onBoxClick]);
+        navigate('/user/'+user.id+'/savedEvents');
+    }, [navigate, onBoxClick, user.id]);
 
     const onLanguageChange = useCallback((e) => {
         setSelectThemeVal(e.target.value);

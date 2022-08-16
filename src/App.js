@@ -29,7 +29,7 @@ export const App = () => {
             <Routes>
               <Route path="/*" element={< RegistrForm />} />
               <Route path='/:form' element={< RegistrForm />} />
-              <Route path='/user/*' element={< Header />} />
+              <Route path='/user/:userId/*' element={< Header />} />
             </Routes>
           </div>
       </LocalizationProvider>

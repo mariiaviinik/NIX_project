@@ -21,7 +21,7 @@ export const SportEventsList = () => {
     const savedSportEvents = useSelector(selectSavedSportEvents);
     const [eventsToDispaly, setEventsToDispaly] = useState(sportEvents);
     const {cityName} = useParams();
-    const currentCity = useSelector(selectCurrentCity);
+    // const currentCity = useSelector(selectCurrentCity);
 
     const language = useSelector(selectLang);
     const [lang, setLang]  = useState(translation[language]['sportEvents']);
@@ -31,19 +31,21 @@ export const SportEventsList = () => {
     }, [setLang, language]);
 
     useEffect(()=>{
-        if(!cityName){
+        if(cityName){
+            setEventsToDispaly(sportEvents)
+        } else{
             setEventsToDispaly(savedSportEvents)
         }
-    }, [setEventsToDispaly, cityName, savedSportEvents]);
+    }, [setEventsToDispaly, cityName, savedSportEvents, sportEvents]);
 
     const dispatch = useDispatch();
     
     useEffect(() => {
         if(cityName){
             dispatch(setCurrentCityAction(cityName));
-            dispatch(getSportEvents());
+            dispatch(getSportEvents(cityName));
         }
-    }, [dispatch, currentCity, cityName]);
+    }, [dispatch, cityName]);
 
     return(
         <div className='column centralize-column'>
@@ -57,6 +59,7 @@ export const SportEventsList = () => {
                             <Table sx={{width:600}}>
                                 <TableHead>
                                     <TableRow>
+                                        <TableCell>{lang['match']}</TableCell>
                                         <TableCell>{lang['tournament']}</TableCell>
                                         <TableCell>{lang['place']}</TableCell>
                                         <TableCell>{lang['time']}</TableCell>

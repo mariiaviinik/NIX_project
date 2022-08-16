@@ -17,6 +17,7 @@ const initialState = {
         savedSportEvents: [[], [], []],
         theme: 'light',
         lang: 'en',
+        system: 'metric',
     }
 }
 

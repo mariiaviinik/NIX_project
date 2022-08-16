@@ -1,9 +1,9 @@
 import './Header.css' ;
-import { useState, useEffect } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { translation } from '../../translation';
-import { selectLang } from '../../Store/User/selectors';
+import { selectLang, selectUserContacts } from '../../Store/User/selectors';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
 import { CityAutocomplete } from '../CityAutocomplete/CityAutocomplete';
 import { Settings } from '../Settings/Settings';
@@ -17,13 +17,20 @@ import { History } from '../History/History';
 
 export const Header = () => {
     const currentCity = useSelector(selectCurrentCity);
+    const user = useSelector(selectUserContacts);
     const language = useSelector(selectLang);
-
     const [lang, setLang]  = useState(translation[language]['header']);
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         setLang(translation[language]['header'])
     }, [setLang, language]);
+
+    const onCityClick = useCallback((e)=>{
+        let inputVal = e.target.innerText.split(", ").shift();
+        navigate('/user/' + user.id + '/' + inputVal + '/current');
+    }, [navigate, user.id])
 
     return (
         <div className='main-container'>
@@ -41,7 +48,7 @@ export const Header = () => {
                         <Link className='link' to={currentCity + '/history'} >{lang['history']}</Link>
                         <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
                     </nav>
-                    : < FavCities />
+                    : < FavCities onLiClick={onCityClick}  />
                 }
             </div>
             <Routes>
@@ -49,7 +56,7 @@ export const Header = () => {
                 <Route path='/:cityName/forecast' element={< ForecastList />} />
                 <Route path='/:cityName/history/*' element={< History />} />
                 <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
-                <Route path='/savedEvents' element={< SportEventsList />} />
+                <Route path='/savedEvents' element={< SportEventsList/>} />
             </Routes>
         </div>
     )

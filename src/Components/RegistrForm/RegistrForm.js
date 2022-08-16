@@ -1,4 +1,5 @@
 import './RegistrForm.css';
+import { v4 as uuidv4 } from "uuid";
 import { useCallback, useState } from 'react';
 import { useNavigate, useParams, Link, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +38,7 @@ export const RegistrForm = () => {
                 setUserCode('');
             }
         }
-    }, [setUserCode, dispatch])
+    }, [setUserCode, dispatch, navigate])
 
     const onEmailChange = useCallback((e) => {
         setEmail(e.target.value);
@@ -74,10 +75,10 @@ export const RegistrForm = () => {
                         onSubmit={(e) => {
                             e.preventDefault();
                             if(form === 'registration'){
-                                setUserObject({email, phone, name, surname, password, login: true})
+                                setUserObject({id: uuidv4(), email, phone, name, surname, password, login: true})
                                 navigate('/code')
                             } else if(email === user?.email && password === user?.password){
-                                navigate('/user');
+                                navigate('/user/' + user.id);
                                 dispatch(changeLogStatusAction(true))
                             }
                         }}
@@ -87,6 +88,7 @@ export const RegistrForm = () => {
                             ?
                             <div className='column' >
                                 <TextField
+                                    variant="standard"
                                     required
                                     label={lang['email']}
                                     type='email'
@@ -94,24 +96,28 @@ export const RegistrForm = () => {
                                     onChange={onEmailChange}
                                 />
                                 <TextField
+                                    variant="standard"
                                     required
                                     label={lang['phone']}
                                     type='phone'
                                     onChange={onPhoneChange}
                                 />
                                 <TextField
+                                    variant="standard"
                                     required
                                     label={lang['name']}
                                     type='text'
                                     onChange={onNameChange}
                                 />
                                 <TextField
+                                    variant="standard"
                                     required
                                     label={lang['surname']}
                                     type='text'
                                     onChange={onSurnameChange}
                                 />
                                  <TextField
+                                    variant="standard"
                                     label={lang['password']}
                                     type="password"
                                     autoComplete="current-password"
@@ -122,6 +128,7 @@ export const RegistrForm = () => {
                             : 
                             <div className='column'>
                                 <TextField
+                                    variant="standard"
                                     required
                                     label={lang['email']}
                                     type='email'
@@ -129,6 +136,7 @@ export const RegistrForm = () => {
                                     onChange={onEmailChange}
                                 />
                                 <TextField
+                                    variant="standard"
                                     label={lang['password']}
                                     type="password"
                                     autoComplete="current-password"
@@ -137,12 +145,13 @@ export const RegistrForm = () => {
                                 />
                             </div>
                         }
-                        <Button type='submit' variant="contained">Sign in</Button>
+                        <Button id='login-btn' type='submit' variant="contained">Sign in</Button>
                     </form>
                 </div>
                 :
                 <TextField
                     required
+                    variant="standard"
                     value={userCode}
                     onChange={(e)=>{onCodeChange(e, userObject)}}
                     label={'Code'}

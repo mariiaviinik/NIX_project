@@ -4,7 +4,7 @@ export const translation = {
             search: 'Пошук міста',
             current: 'Поточна погода',
             forecast: 'Прогноз',
-            history: 'Істотрія',
+            history: 'Історія',
             sport: 'Спортивні події',
         },
         settings:{
@@ -34,7 +34,8 @@ export const translation = {
             pressure: 'Тиск',
         },
         sportEvents: {
-            tournament: 'Подія',
+            match: 'Матч',
+            tournament: 'Турнір',
             place: 'Місце',
             time: 'Час',
             type: [
@@ -87,7 +88,8 @@ export const translation = {
             pressure: 'Pressure',
         },
         sportEvents: {
-            tournament: 'Event',
+            match: 'Match',
+            tournament: 'Tournament',
             place: 'Place',
             time: 'Time',
             type: [

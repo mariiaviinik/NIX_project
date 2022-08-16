@@ -7,15 +7,9 @@ import { deleteFavouriteCityAction } from '../../Store/User/actions';
 import { useNavigate } from "react-router-dom";
 
 
-export const FavCities = ({ onCityClick }) => {
+export const FavCities = ({ onLiClick }) => {
     const cities = useSelector(selectFavCities);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const onLiClick = useCallback((e)=>{
-      let inputVal = e.target.innerText.split(", ").shift();
-      navigate('/user/'+inputVal + '/current');
-  }, [navigate])
 
     const onCityDelete = useCallback((index)=>{
         dispatch(deleteFavouriteCityAction(index));
