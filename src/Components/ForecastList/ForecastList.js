@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { selectForecastDt } from '../../Store/Forecast/selectors';
 import { getWeatherForecast } from '../../Store/Forecast/thunks';
 import { ForecastItem } from '../ForecastItem/ForecastItem';
@@ -10,7 +10,6 @@ export const ForecastList = () => {
     const forecastDt = useSelector(selectForecastDt);
     const {cityName} = useParams();
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {

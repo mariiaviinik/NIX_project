@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useComponentVisible } from './useComponentVisible';
 import debounce from 'lodash.debounce';
-import { ListItemText } from '@mui/material';
+import { ListItemText, Button } from '@mui/material';
 import './CityAutocomplete.css';
 import { selectAutocompleteDt } from '../../Store/Autocomplete/selectors';
 import { getAutocompleteDt } from '../../Store/Autocomplete/thunks';
@@ -79,7 +79,8 @@ export const CityAutocomplete = ({text}) => {
               return (
                 <li key={option.id} >
                   <ListItemText onClick={onLiClick}  id={option.id} primary={[option.name, option.region, option.country].join(', ')} />
-                  <button onClick={() => {addFavCity(option.name)}}>add</button>
+                  <Button onClick={()=>{addFavCity(option.name)}}>Add</Button>
+                  {/* <button onClick={() => {addFavCity(option.name)}}>add</button> */}
                 </li>
               );
             })

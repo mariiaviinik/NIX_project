@@ -1,6 +1,7 @@
+import './FavCities.css';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ListItemText, ListItem } from '@mui/material';
+import { ListItemText, ListItem, Button } from '@mui/material';
 import { selectFavCities } from '../../Store/User/selectors';
 import { deleteFavouriteCityAction } from '../../Store/User/actions';
 import { useNavigate } from "react-router-dom";
@@ -21,17 +22,21 @@ export const FavCities = ({ onCityClick }) => {
     }, [dispatch])
     
     return(
-        <ul>
-        {
-          cities.map((city, index) => { 
-            return (
-              <ListItem  key={index} >
-                <ListItemText onClick={onLiClick} primary={city} />
-                <button onClick={()=>{onCityDelete(index)}}>delete</button>
-              </ListItem >
-            );
-          })
-        }
-      </ul>
+      <div>
+        <h3>Your favourite cities</h3>
+        <ul className="fav-cities-list">
+          {
+            cities.map((city, index) => { 
+              return (
+                <ListItem  key={index} sx={{width: 200}} >
+                  <ListItemText onClick={onLiClick} primary={city} />
+                  <Button onClick={()=>{onCityDelete(index)}}>Delete</Button>
+                  {/* <button onClick={()=>{onCityDelete(index)}}>delete</button> */}
+                </ListItem >
+              );
+            })
+          }
+        </ul>
+      </div>
     );
 }

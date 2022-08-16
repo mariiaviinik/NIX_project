@@ -1,5 +1,6 @@
 import './ForecastItem.css';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
     Table,
     TableBody,
@@ -8,11 +9,28 @@ import {
     Paper,
 } from '@mui/material';
 import { getMonthName } from '../getMonth';
-import { Hour } from '../Hour/Hour'
+import { Hour } from '../Hour/Hour';
+import { measuringSystem } from '../../measure';
+import { selectSystem } from '../../Store/User/selectors';
+import { translation } from '../../translation';
+import { selectLang } from '../../Store/User/selectors';
+
 
 export const ForecastItem = ({ index, currentDate, weather, byHour}) => {
     const date = new Date(currentDate);
     const [isHide, setIsHide] = useState(true);
+    const currentSystem = useSelector(selectSystem);
+    const [mesureType, setMeasureType] = useState(measuringSystem[currentSystem]);
+    const language = useSelector(selectLang);
+    const [lang, setLang]  = useState(translation[language]['measure']);
+
+    useEffect(()=>{
+        setLang(translation[language]['measure'])
+    }, [setLang, language]);
+
+    useEffect(()=>{
+        setMeasureType(measuringSystem[currentSystem])
+    }, [setMeasureType, currentSystem])
 
     const showByHours = useCallback(()=>{
             setIsHide(isHide ? false : true)
@@ -35,8 +53,8 @@ export const ForecastItem = ({ index, currentDate, weather, byHour}) => {
                         <img src={weather.condition.icon} alt='weather icon' className='weather-icon' />
                         <p>{weather.condition.text}</p>
                         <div>
-                            <div>{Math.round(weather.mintemp_c)}°</div>
-                            <div>{Math.round(weather.maxtemp_c)}°</div>
+                            <div>{Math.round(weather['mintemp'+mesureType['degrees']])+lang[mesureType['degrees']]}</div>
+                            <div>{Math.round(weather['maxtemp'+mesureType['degrees']])+lang[mesureType['degrees']]}</div>
                         </div>
                 </div>
                 {
@@ -51,10 +69,6 @@ export const ForecastItem = ({ index, currentDate, weather, byHour}) => {
                                         key={index}
                                         dt={hour}
                                     />
-                                    // <div key={index}>
-                                    //     <p>{index}</p>
-                                    //     <p>{hour.temp_c}</p>
-                                    // </div>
                                 )
                             })
                         }

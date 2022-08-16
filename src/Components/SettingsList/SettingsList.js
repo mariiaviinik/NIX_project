@@ -51,7 +51,7 @@ export const SettingsList = ({ onBoxClick }) => {
     }, [dispatch]);
 
     const changeSystemMode = useCallback((e) => {
-        const system = e.target.checked ? 'metric' : 'imperial';
+        const system = e.target.checked ? 'imperial' : 'metric';
         dispatch(changeSystemAction(system))
     }, [dispatch]);
 
@@ -87,16 +87,16 @@ export const SettingsList = ({ onBoxClick }) => {
                 <ListItem>
                     < FormControlLabel 
                         control={<Switch checked={currentTheme === 'dark' ? true : false} />} 
-                            label={lang['theme']}
-                            onChange={changeThemeMode} 
+                        label={lang['theme']}
+                        onChange={changeThemeMode} 
                     />
                 </ListItem>
                 <ListItem>
                     <FormControlLabel 
-                    control={<Switch checked={currentSystem === 'Imperial' ? true : false} />} 
-                    label={lang['system']}
-                    onChange={changeSystemMode} 
-                />
+                        control={<Switch checked={currentSystem === 'imperial' ? true : false} />} 
+                        label={lang['system']}
+                        onChange={changeSystemMode} 
+                    />
                 </ListItem>
                 <Divider /> 
                 <ListItemButton onClick={()=>{onLogClick(user.login)}}>

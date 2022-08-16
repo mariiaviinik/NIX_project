@@ -1,0 +1,6 @@
+.fav-cities-list{
+    padding: 0;
+}
+.fav-cities-list>li{
+    padding-left: 0;
+}

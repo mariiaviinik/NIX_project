@@ -42,6 +42,14 @@ export const translation = {
                 'Крікет',
                 'Гольф'
             ]
+        },
+        measure: {
+            _c: '°C',
+            _kph: ' км/год',
+            _mb: ' мм',
+            _f: '°F',
+            _mph: ' миль/год',
+            _in: ' дюйма',
         }
     },
     en: {
@@ -87,6 +95,14 @@ export const translation = {
                 'Cricket',
                 'Golf'
             ]
+        },
+        measure: {
+            _c: '°C',
+            _kph: ' kph',
+            _mb: ' mm',
+            _f: '°F',
+            _mph: ' mph',
+            _in: ' inch',
         }
     }
 }
