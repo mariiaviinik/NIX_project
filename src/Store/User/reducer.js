@@ -11,7 +11,6 @@ import {
 } from './actions';
 
 const initialState = {
-    contacts: {},
     settings: {
         cities: [],
         savedSportEvents: [[], [], []],
@@ -24,13 +23,15 @@ const initialState = {
 export const userReducer = (state=initialState, action) => {
     switch(action.type){
         case SET_USER_DT_ACTION:
-            return {...state, contacts: action.data}
+            return {...state}
         case ADD_FAVOURITE_CITY_ACTION:
-            return { ...state, settings: {...state.settings, cities: [...state.settings.cities, action.city ]}}
+            const arr = state.settings.cities.filter((city)=> action.city.id === city.id);
+            if(arr.length) return {...state};
+            return { ...state, settings: {...state.settings, cities: [...state.settings.cities, action.city ]}};
         case DELETE_FAVOURITE_CITY_ACTION:
             return { ...state, settings: 
                 {...state.settings,
-                 cities: state.settings.cities.filter((city, index) => action.index !== index)
+                    cities: state.settings.cities.filter((city) => action.id !== city.id)
                 }
             }
         case ADD_SPORT_EVENT_ACTION:

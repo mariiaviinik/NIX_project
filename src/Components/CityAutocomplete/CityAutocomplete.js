@@ -21,8 +21,8 @@ export const CityAutocomplete = ({text}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const addFavCity = useCallback((city)=>{
-    dispatch(addFavouriteCityAction(city));
+  const addFavCity = useCallback((name, id)=>{
+    dispatch(addFavouriteCityAction({id, name}));
   }, [dispatch]);
 
   const onInputChange = useCallback((e)=>{
@@ -73,7 +73,7 @@ export const CityAutocomplete = ({text}) => {
                     id={option.id} 
                     primary={[option.name, option.region ? option.region : null, option.country].filter(Boolean).join(', ')} 
                   />
-                  <Button onClick={()=>{addFavCity(option.name)}}>Add</Button>
+                  <Button onClick={()=>{addFavCity(option.name, option.id)}}>Add</Button>
                 </li>
               );
             })

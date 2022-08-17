@@ -20,8 +20,8 @@ export const FavCities = ({ onLiClick }) => {
 
     const dispatch = useDispatch();
 
-    const onCityDelete = useCallback((index)=>{
-        dispatch(deleteFavouriteCityAction(index));
+    const onCityDelete = useCallback((id)=>{
+        dispatch(deleteFavouriteCityAction(id));
     }, [dispatch])
     
     return(
@@ -39,8 +39,8 @@ export const FavCities = ({ onLiClick }) => {
                   return (
                     <div className='flex'  key={index}>
                       <ListItem sx={{width: 310}}  >
-                        <ListItemText onClick={onLiClick} primary={city} />
-                        <button onClick={()=>{onCityDelete(index)}} className={'button'}>
+                        <ListItemText onClick={onLiClick} primary={city.name} />
+                        <button onClick={()=>{onCityDelete(city.id)}} className={'button'}>
                             <b>DELETE</b>
                         </button>
                       </ListItem >

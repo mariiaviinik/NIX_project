@@ -35,6 +35,11 @@ export const SettingsList = ({ onBoxClick }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const onHomeClick = useCallback(()=>{
+        onBoxClick(false);
+        navigate('/user/'+user.id);
+    }, [navigate, onBoxClick, user.id]);
+
     const onSportClick = useCallback(()=>{
         onBoxClick(false);
         navigate('/user/'+user.id+'/savedEvents');
@@ -70,6 +75,9 @@ export const SettingsList = ({ onBoxClick }) => {
             sx={{ paddingLeft: 2, width: 250 }}
         >
             <List>
+                <ListItemButton onClick={onHomeClick}>
+                    <ListItemText primary={lang['home']} />
+                </ListItemButton>
                 <ListItemButton onClick={onSportClick}>
                     <ListItemText primary={lang['sport']} />
                 </ListItemButton>

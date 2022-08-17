@@ -35,15 +35,15 @@ export const RegistrForm = () => {
         setUserCode(inputCode);
         if(inputCode.length === 4){
             if(registrationCode === inputCode){
-                dispatch(setUserDtAction(obj
-                    // {contacts: obj,
-                    // settings: {
-                    //     cities: [],
-                    //     savedSportEvents: [[], [], []],
-                    //     theme: 'light',
-                    //     lang: 'en',
-                    //     system: 'metric',
-                    // }}
+                dispatch(setUserDtAction(
+                    {contacts: obj,
+                    settings: {
+                        cities: [],
+                        savedSportEvents: [[], [], []],
+                        theme: 'light',
+                        lang: 'en',
+                        system: 'metric',
+                    }}
                 ))
                 navigate('/user');
             } else {

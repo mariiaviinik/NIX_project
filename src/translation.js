@@ -13,6 +13,7 @@ export const translation = {
             sport: 'Спортивні події',
         },
         settings:{
+            home: 'Головна сторінка',
             sport: 'Збережені спортивні події',
             system: 'Метрична/Імперська',
             theme: 'Світла/Темна',
@@ -72,6 +73,7 @@ export const translation = {
             sport: 'Sport events',
         },
         settings:{
+            home: 'Home',
             sport: 'Saved sport events',
             system: 'Metric/Imperial',
             theme: 'Light/Dark',

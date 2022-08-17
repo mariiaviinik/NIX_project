@@ -2,7 +2,6 @@ import './Header.css' ;
 import { useState, useEffect, useCallback } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useTheme } from '@mui/material';
 import { translation } from '../../translation';
 import logo from '../../img/logo.PNG';
 import { selectLang, selectUserContacts, selectTheme } from '../../Store/User/selectors';
@@ -14,6 +13,7 @@ import { ForecastList } from '../ForecastList/ForecastList';
 import { SportEventsList } from '../SportEventsList/SportEventsList';
 import { FavCities } from '../FavCities/FavCities';
 import { History } from '../History/History';
+import { RegistrForm } from '../RegistrForm/RegistrForm';
 
 
 export const Header = () => {
@@ -35,39 +35,51 @@ export const Header = () => {
     }, [navigate, user.id])
 
     return (
-        <div className='bg'>
-            <div className={"header " + currentTheme}>
-                <div className='flex centralize-column'>
-                    <img src={logo} className='image' alt='logo-image' />
-                </div>
-                <div className='flex'>
-                    < CityAutocomplete text={lang['search']} />
-                    < Settings />
-                </div>
-            </div>
-            <div className='main-container'>
+        <div>
+            {
+                user.login
+                ?
                 <div>
-                    {
-                        currentCity
-                        ? 
-                        <nav className='link-container'>
-                            <Link className='link' to={currentCity + '/current'} >{lang['current']}</Link>
-                            <Link className='link' to={currentCity + '/forecast'} >{lang['forecast']}</Link>
-                            <Link className='link' to={currentCity + '/history'} >{lang['history']}</Link>
-                            <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
-                        </nav>
-                        : < FavCities onLiClick={onCityClick}  />
-                    }
+                    <div className={"header " + currentTheme}>
+                        <div className='flex centralize-column'>
+                            <img src={logo} className='image' alt='logo-image' />
+                        </div>
+                        <div className='flex'>
+                            < CityAutocomplete text={lang['search']} />
+                            < Settings />
+                        </div>
+                    </div>
+                    <div className='main-container'>
+                        <div>
+                            {
+                                currentCity
+                                ? 
+                                <nav className='link-container'>
+                                    <Link className='link' to={currentCity + '/current'} >{lang['current']}</Link>
+                                    <Link className='link' to={currentCity + '/forecast'} >{lang['forecast']}</Link>
+                                    <Link className='link' to={currentCity + '/history'} >{lang['history']}</Link>
+                                    <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
+                                </nav>
+                                : 
+                                <div>
+                                    {/* < FavCities onLiClick={onCityClick}  />
+                                    < SportEventsList/> */}
+                                </div>
+                            }
+                        </div>
+                        <Routes>
+                            <Route path='/:cityName/current' element={< CurrentWeather />} />
+                            <Route path='/:cityName/forecast' element={< ForecastList />} />
+                            <Route path='/:cityName/history/*' element={< History />} />
+                            <Route path='/:cityName/history/:date' element={< History />} />
+                            <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
+                            <Route path='/savedEvents' element={< SportEventsList/>} />
+                            <Route path='/' element={< FavCities onLiClick={onCityClick} />} />
+                        </Routes>
+                    </div>
                 </div>
-                <Routes>
-                    <Route path='/:cityName/current' element={< CurrentWeather />} />
-                    <Route path='/:cityName/forecast' element={< ForecastList />} />
-                    <Route path='/:cityName/history/*' element={< History />} />
-                    <Route path='/:cityName/history/:date' element={< History />} />
-                    <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
-                    <Route path='/savedEvents' element={< SportEventsList/>} />
-                </Routes>
-            </div>
+                : <RegistrForm />
+            }
         </div>
     )
 }

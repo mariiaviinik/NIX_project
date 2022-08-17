@@ -27,10 +27,10 @@ export const addFavouriteCityAction = (city) => {
     };
 }
 
-export const deleteFavouriteCityAction = (index) => {
+export const deleteFavouriteCityAction = (id) => {
     return {
         type: DELETE_FAVOURITE_CITY_ACTION,
-        index
+        id
     };
 }
 

@@ -17,9 +17,11 @@ export const getWeatherHistory = (city, startDate, endDate) => {
             if(response.ok){
                 const data = await response.json();
                 dispatch(getWeatherHistorySuccessAction(data));
+            } else{
+                dispatch(getWeatherHistoryFailureAction('Error happened'));
             }
         } catch(error){
-            dispatch(getWeatherHistoryFailureAction(error));
+            dispatch(getWeatherHistoryFailureAction(error.message));
         }
     }
 }

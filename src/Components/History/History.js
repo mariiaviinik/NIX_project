@@ -12,8 +12,8 @@ import { setCurrentCityAction } from '../../Store/Forecast/actions';
 
 export const History = () => {
     const historyDt = useSelector(selectHistory);
-    const [dateVal, setDateVal] = useState(dayjs())
     const {cityName, date} = useParams();
+    const [dateVal, setDateVal] = useState(date ? date : dayjs())
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,9 +29,10 @@ export const History = () => {
 
     const getDate = useCallback((e) => {
         setDateVal(e);
+        console.log(e)
         const date = e.format('YYYY-MM-DD');
         navigate(date);
-    }, [dispatch, navigate]);
+    }, [navigate]);
 
     return(
         <div className='centralize-column column'>

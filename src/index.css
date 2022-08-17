@@ -7,4 +7,5 @@ body {
 }
 html, body, #root,  #root > div {
   width: 100vw;
+  box-sizing: border-box;
 }
