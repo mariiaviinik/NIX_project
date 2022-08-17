@@ -1,9 +1,11 @@
 .fav-cities{
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 .welcome-text-container{
-    transform: translateY(80%);
+    padding: 15px;
+    transform: translateY(70%);
 }
 .fav-cities-list{
     padding: 0;

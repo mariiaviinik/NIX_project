@@ -14,10 +14,11 @@ import { getSportEvents } from '../../Store/Sport/thunks';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
 import { setCurrentCityAction } from '../../Store/Forecast/actions';
 import { SportEvent } from '../SportEvent/SportEvent';
-import { selectSavedSportEvents, selectLang } from '../../Store/User/selectors';
+import { selectSavedSportEvents, selectLang, selectTheme } from '../../Store/User/selectors';
 
 
 export const SportEventsList = () => {
+    const currentTheme = useSelector(selectTheme);
     const sportEvents = useSelector(selectSportEvents);
     const savedSportEvents = useSelector(selectSavedSportEvents);
     const [eventsToDispaly, setEventsToDispaly] = useState(sportEvents);
@@ -48,17 +49,17 @@ export const SportEventsList = () => {
     }, [dispatch, cityName]);
 
     return(
-        <div className='column centralize-column'>
+        <div className={'column centralize-column'}>
             {
                 eventsToDispaly.map((type, index)=>{
                     return(
                         type.length
                         ?
-                        <div key={index} className='column m-b-20'>
+                        <div key={index} className={'column m-b-20 sport-list ' + currentTheme}>
                             <div className='caption'>
                                 <h1>{lang['type'][index]}</h1>
                             </div>
-                            <Table sx={{width:600}}>
+                            <Table sx={{width:600, padding: '20px'}}>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>{lang['match']}</TableCell>

@@ -13,6 +13,7 @@ import { ForecastList } from '../ForecastList/ForecastList';
 import { SportEventsList } from '../SportEventsList/SportEventsList';
 import { FavCities } from '../FavCities/FavCities';
 import { History } from '../History/History';
+import { DatePicker } from '../DatePicker/DatePicker';
 import { RegistrForm } from '../RegistrForm/RegistrForm';
 
 
@@ -42,7 +43,7 @@ export const Header = () => {
                 <div>
                     <div className={"header " + currentTheme}>
                         <div className='flex centralize-column'>
-                            <img src={logo} className='image' alt='logo-image' />
+                            <img src={logo} className='image' alt='logo' />
                         </div>
                         <div className='flex'>
                             < CityAutocomplete text={lang['search']} />
@@ -61,17 +62,14 @@ export const Header = () => {
                                     <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
                                 </nav>
                                 : 
-                                <div>
-                                    {/* < FavCities onLiClick={onCityClick}  />
-                                    < SportEventsList/> */}
-                                </div>
+                                null
                             }
                         </div>
                         <Routes>
                             <Route path='/:cityName/current' element={< CurrentWeather />} />
                             <Route path='/:cityName/forecast' element={< ForecastList />} />
                             <Route path='/:cityName/history/*' element={< History />} />
-                            <Route path='/:cityName/history/:date' element={< History />} />
+                            {/* <Route path='/:cityName/history/:date' element={< History />} /> */}
                             <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
                             <Route path='/savedEvents' element={< SportEventsList/>} />
                             <Route path='/' element={< FavCities onLiClick={onCityClick} />} />

@@ -19,6 +19,12 @@
     right:-10px;
     top:-1px;
 }
+#light .caption>h1:after{
+    background-color: #121212;
+}
+#dark .caption>h1:after{
+    background-color:white;
+}
 .caption>h1:before {
     padding:0;
     margin:0;
@@ -29,6 +35,16 @@
     position: absolute;
     left:-10px;
     bottom:-1px;
+}
+#light .caption>h1:before{
+    background-color: #121212;
+}
+#dark .caption>h1:before{
+    background-color:white;
+}
+.sport-list{
+    padding: 10px 30px;
+    box-sizing: border-box;
 }
 .m-b-20{
     margin-bottom: 20px;

@@ -5,11 +5,12 @@ import { translation } from '../../translation';
 import { ListItemText, ListItem, Divider } from '@mui/material';
 import { selectFavCities } from '../../Store/User/selectors';
 import { deleteFavouriteCityAction } from '../../Store/User/actions';
-import { selectLang } from '../../Store/User/selectors';
+import { selectLang, selectTheme } from '../../Store/User/selectors';
 import { useNavigate } from "react-router-dom";
 
 
 export const FavCities = ({ onLiClick }) => {
+    const currentTheme = useSelector(selectTheme);
     const cities = useSelector(selectFavCities);
     const language = useSelector(selectLang);
     const [lang, setLang]  = useState(translation[language]['mainPage']);
@@ -29,7 +30,7 @@ export const FavCities = ({ onLiClick }) => {
         {
           cities.length
           ?
-          <div>
+          <div className={currentTheme}>
             <div className='caption'>
                 <h1>{lang['caption']}</h1>
             </div>
@@ -52,7 +53,7 @@ export const FavCities = ({ onLiClick }) => {
             </ul>
           </div>
           :
-          <div className='welcome-text-container'>
+          <div className={'welcome-text-container ' + currentTheme}>
             <div className='caption'>
               <h1>{lang['welcome']}</h1>
             </div>

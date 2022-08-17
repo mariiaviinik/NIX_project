@@ -9,10 +9,10 @@ import { ForecastList } from '../ForecastList/ForecastList';
 import { setCurrentCityAction } from '../../Store/Forecast/actions';
 
 
-export const History = () => {
-    const date = useParams()['*'];
+export const DatePicker = ({ date }) => {
     const [dateVal, setDateVal] = useState(date ? date : dayjs());
     const {cityName} = useParams();
+    console.log( {date} = useParams())
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,9 +26,9 @@ export const History = () => {
     const getDate = useCallback((e) => {
         const today = dayjs();
         const difference = today.diff(e, 'day');
-        console.log(today.diff(e, 'day'));
-        if(difference>7 || difference<1){
-            alert('');
+        // console.log(today.diff(e, 'day'));
+        if(difference>7){
+            alert('BAAAAAAAAAAAAAAAAD');
         } else{
             setDateVal(e);
             const date = e.format('YYYY-MM-DD');
