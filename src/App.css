@@ -8,7 +8,13 @@
     font-weight: 400;
     font-size: 18px;
 }
-
+.circular-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #light{
     background-color: white;
     color: blavk;

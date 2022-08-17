@@ -26,7 +26,6 @@ export const History = () => {
     const getDate = useCallback((e) => {
         const today = dayjs();
         const difference = today.diff(e, 'day');
-        console.log(today.diff(e, 'day'));
         if(difference>7 || difference<1){
             alert('');
         } else{
@@ -37,7 +36,7 @@ export const History = () => {
             }
             navigate(date);
         }
-    }, [navigate]);
+    }, [navigate, dispatch, cityName]);
 
     return(
         <div className='centralize-column column'>

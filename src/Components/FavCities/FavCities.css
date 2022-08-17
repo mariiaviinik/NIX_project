@@ -5,6 +5,7 @@
 }
 .welcome-text-container{
     padding: 15px;
+    margin-top: 38px;
     transform: translateY(70%);
 }
 .fav-cities-list{

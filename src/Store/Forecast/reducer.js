@@ -5,6 +5,8 @@ import {
 } from './actions';
 
 const initialState = {
+    isLoadingForecastList: false,
+    isLoadingCurrent: false,
     weatherForecastDt: [],
     currentWeather: [],
     weatherHistoryDt: [],
@@ -14,9 +16,14 @@ const initialState = {
 export const forecastReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_WEATHER_FORECAST_ACTION:
-            return{...state}
+            return{...state, 
+                isLoadingForecastList: true,
+                isLoadingCurrent: true,
+            }
         case GET_WEATHER_FORECAST_SUCCESS_ACTION:
             return{...state,
+                isLoadingForecastList: false,
+                isLoadingCurrent: false,
                 weatherForecastDt: action.data.forecast.forecastday,
                 currentWeather: action.data.current,
                 currentCity: action.data.location.name,

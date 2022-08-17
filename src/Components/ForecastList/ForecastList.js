@@ -1,16 +1,18 @@
-import { v4 as uuid } from 'uuid';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Routes, Route } from "react-router-dom";
-import { selectForecastDt } from '../../Store/Forecast/selectors';
-import { selectHistory } from '../../Store/History/selectors';
+import { useParams } from "react-router-dom";
+import { CircularProgress } from '@mui/material';
+import { selectForecastDt, selectIsLoadingForecastList } from '../../Store/Forecast/selectors';
+import { selectHistory, selectIsLoadingHistory } from '../../Store/History/selectors';
 import { getWeatherForecast } from '../../Store/Forecast/thunks';
 import { ForecastItem } from '../ForecastItem/ForecastItem';
 import { getWeatherHistory } from '../../Store/History/thunks';
 
 
 export const ForecastList = () => {
+    const isLoadingHistoryList = useSelector(selectIsLoadingHistory);
+    const isLoadingForecastList = useSelector(selectIsLoadingForecastList);
     const forecastDt = useSelector(selectForecastDt);
     const historyDt = useSelector(selectHistory);
     const [toDisplay, setToDisplay] = useState([]);
@@ -36,6 +38,13 @@ export const ForecastList = () => {
         }
     }, [dispatch, cityName, date])
 
+    if(isLoadingForecastList || isLoadingHistoryList){
+        return (
+            <div className='circular-container'>
+                <CircularProgress />
+            </div>
+        );
+    }
 
     return(
         <div className='centralize-column column'>
@@ -43,7 +52,7 @@ export const ForecastList = () => {
                 toDisplay.map((item, index) => { 
                     return (
                         < ForecastItem 
-                            key={uuid()}
+                            key={index}
                             index={index}
                             currentDate={item.date}
                             weather={item.day}

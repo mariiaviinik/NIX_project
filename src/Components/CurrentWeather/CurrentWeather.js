@@ -7,21 +7,22 @@ import {
     TableRow,
     TableCell,
     Paper,
+    CircularProgress,
 } from '@mui/material';
 import './CurrentWeather.css';
-import { selectCurrentWeather } from '../../Store/Forecast/selectors';
+import { selectCurrentWeather, selectIsLoadingCurrent } from '../../Store/Forecast/selectors';
 import { getWeatherForecast } from '../../Store/Forecast/thunks';
 import { translation } from '../../translation';
 import { selectLang } from '../../Store/User/selectors';
 
 
 export const CurrentWeather = () =>{
+    const isLoadingCurrent = useSelector(selectIsLoadingCurrent);
     const currentWeather = useSelector(selectCurrentWeather);
     const language = useSelector(selectLang);
     const [lang, setLang]  = useState(translation[language]['current']);
 
     const date = currentWeather?.last_updated?.split(' ');
-    const currentWeatherLength = Object.keys(currentWeather).length;
     const {cityName} = useParams();
 
     useEffect(()=>{
@@ -35,7 +36,14 @@ export const CurrentWeather = () =>{
             dispatch(getWeatherForecast(cityName));
         }
     }, [dispatch, cityName]);
-    
+
+    if(isLoadingCurrent){
+        return (
+            <div className='circular-container'>
+                <CircularProgress color="inherit" />
+            </div>
+        );
+    }    
 
     return(
         <div className='centralize-row'>

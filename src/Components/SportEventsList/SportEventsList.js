@@ -6,18 +6,19 @@ import {
     TableHead,
     TableRow,
     TableCell,
+    CircularProgress
 } from '@mui/material';
 import './SportEventList.css';
 import { translation } from '../../translation';
-import { selectSportEvents } from '../../Store/Sport/selectors';
+import { selectSportEvents, selectIsLoadingSportList } from '../../Store/Sport/selectors';
 import { getSportEvents } from '../../Store/Sport/thunks';
-import { selectCurrentCity } from '../../Store/Forecast/selectors';
 import { setCurrentCityAction } from '../../Store/Forecast/actions';
 import { SportEvent } from '../SportEvent/SportEvent';
 import { selectSavedSportEvents, selectLang, selectTheme } from '../../Store/User/selectors';
 
 
 export const SportEventsList = () => {
+    const isLoadingSportList =useSelector(selectIsLoadingSportList);
     const currentTheme = useSelector(selectTheme);
     const sportEvents = useSelector(selectSportEvents);
     const savedSportEvents = useSelector(selectSavedSportEvents);
@@ -47,6 +48,14 @@ export const SportEventsList = () => {
             dispatch(getSportEvents(cityName));
         }
     }, [dispatch, cityName]);
+
+    if(isLoadingSportList){
+        return (
+            <div className='circular-container'>
+                <CircularProgress color="inherit" />
+            </div>
+        );
+    }
 
     return(
         <div className={'column centralize-column'}>

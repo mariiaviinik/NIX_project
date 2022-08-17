@@ -53,7 +53,7 @@ export const FavCities = ({ onLiClick }) => {
             </ul>
           </div>
           :
-          <div className={'welcome-text-container ' + currentTheme}>
+          <div className='welcome-text-container'>
             <div className='caption'>
               <h1>{lang['welcome']}</h1>
             </div>
