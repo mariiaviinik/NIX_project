@@ -1,13 +1,17 @@
 import './RegistrForm.css';
 import { v4 as uuidv4 } from "uuid";
 import { useCallback, useState } from 'react';
-import { useNavigate, useParams, Link, Routes, Route } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@mui/material';
 import { translation } from '../../translation';
 import { setUserDtAction, changeLogStatusAction} from '../../Store/User/actions';
 import { selectUserContacts } from '../../Store/User/selectors';
 
+const inputStyle = {
+    marginTop: '10px',
+    width: '250px',
+}
 
 export const RegistrForm = () => {
     const registrationCode = '1111';
@@ -31,7 +35,16 @@ export const RegistrForm = () => {
         setUserCode(inputCode);
         if(inputCode.length === 4){
             if(registrationCode === inputCode){
-                dispatch(setUserDtAction(obj))
+                dispatch(setUserDtAction(obj
+                    // {contacts: obj,
+                    // settings: {
+                    //     cities: [],
+                    //     savedSportEvents: [[], [], []],
+                    //     theme: 'light',
+                    //     lang: 'en',
+                    //     system: 'metric',
+                    // }}
+                ))
                 navigate('/user');
             } else {
                 alert('Wrong code number');
@@ -61,14 +74,14 @@ export const RegistrForm = () => {
     }, [setPassword])
 
     return(
-        <div className='container column'>
+        <div className='registr-container column'>
             {
                 form !== 'code'
                 ?
                 <div className='column' >
-                    <nav>
-                        <Link className='link' to={'/'} >{lang['links']['login']}</Link>
-                        <Link className='link' to={'/registration'} >{lang['links']['registr']}</Link>
+                    <nav className='flex reigstr-link-holder'>
+                        <Link style={{padding: 0}} className='link' to={'/'} >{lang['links']['login']}</Link>
+                        <Link style={{padding: 0}} className='link' to={'/registration'} >{lang['links']['registr']}</Link>
                     </nav>
                     <form 
                         className='column' 
@@ -94,6 +107,7 @@ export const RegistrForm = () => {
                                     type='email'
                                     autoComplete='username'
                                     onChange={onEmailChange}
+                                    style={inputStyle}
                                 />
                                 <TextField
                                     variant="standard"
@@ -101,6 +115,7 @@ export const RegistrForm = () => {
                                     label={lang['phone']}
                                     type='phone'
                                     onChange={onPhoneChange}
+                                    style={inputStyle}
                                 />
                                 <TextField
                                     variant="standard"
@@ -108,6 +123,7 @@ export const RegistrForm = () => {
                                     label={lang['name']}
                                     type='text'
                                     onChange={onNameChange}
+                                    style={inputStyle}
                                 />
                                 <TextField
                                     variant="standard"
@@ -115,6 +131,7 @@ export const RegistrForm = () => {
                                     label={lang['surname']}
                                     type='text'
                                     onChange={onSurnameChange}
+                                    style={inputStyle}
                                 />
                                  <TextField
                                     variant="standard"
@@ -123,6 +140,7 @@ export const RegistrForm = () => {
                                     autoComplete="current-password"
                                     onChange={onPasswordChange}
                                     required
+                                    style={inputStyle}
                                 />
                             </div>
                             : 
@@ -134,6 +152,7 @@ export const RegistrForm = () => {
                                     type='email'
                                     autoComplete='username'
                                     onChange={onEmailChange}
+                                    style={inputStyle}
                                 />
                                 <TextField
                                     variant="standard"
@@ -142,6 +161,7 @@ export const RegistrForm = () => {
                                     autoComplete="current-password"
                                     onChange={onPasswordChange}
                                     required
+                                    style={inputStyle}
                                 />
                             </div>
                         }

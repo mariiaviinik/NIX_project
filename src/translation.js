@@ -88,7 +88,7 @@ export const translation = {
             password: 'password',
             links: {
                 login: 'Log in',
-                registr: 'Registr'
+                registr: 'Registration'
             }
         },
         current: {

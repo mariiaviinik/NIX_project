@@ -1,17 +1,18 @@
+import './CityAutocomplete.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useComponentVisible } from './useComponentVisible';
-import debounce from 'lodash.debounce';
 import { ListItemText, Button } from '@mui/material';
-import './CityAutocomplete.css';
+import debounce from 'lodash.debounce';
+import { selectTheme } from '../../Store/User/selectors';
+import { useComponentVisible } from './useComponentVisible';
 import { selectAutocompleteDt } from '../../Store/Autocomplete/selectors';
 import { getAutocompleteDt } from '../../Store/Autocomplete/thunks';
 import { addFavouriteCityAction } from '../../Store/User/actions';
 
 
 export const CityAutocomplete = ({text}) => {
-
+  const currentTheme = useSelector(selectTheme);
   const AutocompleteDt = useSelector(selectAutocompleteDt);
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const [inputVal, setInputVal] = useState('');
@@ -49,20 +50,8 @@ export const CityAutocomplete = ({text}) => {
 
   return (
     <div ref={ref}>  
-      {/* <TextField 
-        type='text'
-        value={inputVal}
-        onChange={(e)=>{
-          onInputChange(e);
-          debouncedOnChange(e);
-        }}  
-        variant='outlined'
-        placeholder={text}
-        size='small'
-        autoComplete='off'
-      /> */}
       <input
-      className='search'
+      className={'search '+currentTheme}
         type='text'
         value={inputVal}
         placeholder={text}
@@ -74,7 +63,7 @@ export const CityAutocomplete = ({text}) => {
       {
         isComponentVisible
         ?
-        <ul className='search-list'>
+        <ul className={'search-list '+currentTheme}>
           {
             AutocompleteDt.map((option) => { 
               return (

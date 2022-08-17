@@ -37,7 +37,7 @@ export const FavCities = ({ onLiClick }) => {
               {
                 cities.map((city, index) => { 
                   return (
-                    <div class='flex'  key={index}>
+                    <div className='flex'  key={index}>
                       <ListItem sx={{width: 310}}  >
                         <ListItemText onClick={onLiClick} primary={city} />
                         <button onClick={()=>{onCityDelete(index)}} className={'button'}>

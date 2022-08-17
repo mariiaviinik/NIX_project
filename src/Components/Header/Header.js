@@ -2,9 +2,10 @@ import './Header.css' ;
 import { useState, useEffect, useCallback } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTheme } from '@mui/material';
 import { translation } from '../../translation';
 import logo from '../../img/logo.PNG';
-import { selectLang, selectUserContacts } from '../../Store/User/selectors';
+import { selectLang, selectUserContacts, selectTheme } from '../../Store/User/selectors';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
 import { CityAutocomplete } from '../CityAutocomplete/CityAutocomplete';
 import { Settings } from '../Settings/Settings';
@@ -17,6 +18,7 @@ import { History } from '../History/History';
 
 export const Header = () => {
     const currentCity = useSelector(selectCurrentCity);
+    const currentTheme = useSelector(selectTheme);
     const user = useSelector(selectUserContacts);
     const language = useSelector(selectLang);
     const [lang, setLang]  = useState(translation[language]['header']);
@@ -34,7 +36,7 @@ export const Header = () => {
 
     return (
         <div className='bg'>
-            <div className="header">
+            <div className={"header " + currentTheme}>
                 <div className='flex centralize-column'>
                     <img src={logo} className='image' alt='logo-image' />
                 </div>
@@ -44,7 +46,7 @@ export const Header = () => {
                 </div>
             </div>
             <div className='main-container'>
-                <div style={{height: '100%'}}>
+                <div>
                     {
                         currentCity
                         ? 

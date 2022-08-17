@@ -1,10 +1,15 @@
-.container{
+.registr-container{
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100vw;
 }
-
+.reigstr-link-holder{
+    justify-content: space-around;
+}
+.reigstr-link-holder>*:hover{
+    font-size: 20px;
+}
 .column{
     display: flex;
     flex-direction: column;
