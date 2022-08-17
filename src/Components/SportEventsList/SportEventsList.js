@@ -7,6 +7,7 @@ import {
     TableRow,
     TableCell,
 } from '@mui/material';
+import './SportEventList.css';
 import { translation } from '../../translation';
 import { selectSportEvents } from '../../Store/Sport/selectors';
 import { getSportEvents } from '../../Store/Sport/thunks';
@@ -21,7 +22,6 @@ export const SportEventsList = () => {
     const savedSportEvents = useSelector(selectSavedSportEvents);
     const [eventsToDispaly, setEventsToDispaly] = useState(sportEvents);
     const {cityName} = useParams();
-    // const currentCity = useSelector(selectCurrentCity);
 
     const language = useSelector(selectLang);
     const [lang, setLang]  = useState(translation[language]['sportEvents']);
@@ -54,8 +54,10 @@ export const SportEventsList = () => {
                     return(
                         type.length
                         ?
-                        <div key={index}>
-                            <h3>{lang['type'][index]}</h3>
+                        <div key={index} className='column m-b-20'>
+                            <div className='caption'>
+                                <h1>{lang['type'][index]}</h1>
+                            </div>
                             <Table sx={{width:600}}>
                                 <TableHead>
                                     <TableRow>

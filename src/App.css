@@ -1,5 +1,6 @@
 #root{
-    margin: 0;
+    width: 100%;
+    background-color: white;
 }
 .link{
     text-decoration: none;
@@ -7,11 +8,24 @@
     font-weight: 400;
     font-size: 18px;
 }
+
 #light{
     background-color: white;
-    color: black;
+    color: blavk;
+    overflow: auto;
+    background-image: url(./img/birds.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 #dark{
     background-color: black;
     color: white;
+    overflow: auto;
+    background-image: url(./img/birdsDark.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100vh;
 }

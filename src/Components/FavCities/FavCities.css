@@ -1,6 +1,16 @@
+.fav-cities{
+    align-items: center;
+    justify-content: center;
+}
+.welcome-text-container{
+    transform: translateY(80%);
+}
 .fav-cities-list{
     padding: 0;
 }
-.fav-cities-list>li{
-    padding-left: 0;
+.fav-cities-list>div{
+    justify-content: space-between;
+}
+.welcome-text{
+    font-size: 20px;
 }

@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { translation } from '../../translation';
+import logo from '../../img/logo.PNG';
 import { selectLang, selectUserContacts } from '../../Store/User/selectors';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
 import { CityAutocomplete } from '../CityAutocomplete/CityAutocomplete';
@@ -12,7 +13,6 @@ import { ForecastList } from '../ForecastList/ForecastList';
 import { SportEventsList } from '../SportEventsList/SportEventsList';
 import { FavCities } from '../FavCities/FavCities';
 import { History } from '../History/History';
-
 
 
 export const Header = () => {
@@ -33,31 +33,39 @@ export const Header = () => {
     }, [navigate, user.id])
 
     return (
-        <div className='main-container'>
+        <div className='bg'>
             <div className="header">
-                < CityAutocomplete text={lang['search']} />
-                < Settings />
+                <div className='flex centralize-column'>
+                    <img src={logo} className='image' alt='logo-image' />
+                </div>
+                <div className='flex'>
+                    < CityAutocomplete text={lang['search']} />
+                    < Settings />
+                </div>
             </div>
-            <div>
-                {
-                    currentCity
-                    ? 
-                    <nav className='link-container'>
-                        <Link className='link' to={currentCity + '/current'} >{lang['current']}</Link>
-                        <Link className='link' to={currentCity + '/forecast'} >{lang['forecast']}</Link>
-                        <Link className='link' to={currentCity + '/history'} >{lang['history']}</Link>
-                        <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
-                    </nav>
-                    : < FavCities onLiClick={onCityClick}  />
-                }
+            <div className='main-container'>
+                <div style={{height: '100%'}}>
+                    {
+                        currentCity
+                        ? 
+                        <nav className='link-container'>
+                            <Link className='link' to={currentCity + '/current'} >{lang['current']}</Link>
+                            <Link className='link' to={currentCity + '/forecast'} >{lang['forecast']}</Link>
+                            <Link className='link' to={currentCity + '/history'} >{lang['history']}</Link>
+                            <Link className='link' to={currentCity + '/sportEvents'} >{lang['sport']}</Link>
+                        </nav>
+                        : < FavCities onLiClick={onCityClick}  />
+                    }
+                </div>
+                <Routes>
+                    <Route path='/:cityName/current' element={< CurrentWeather />} />
+                    <Route path='/:cityName/forecast' element={< ForecastList />} />
+                    <Route path='/:cityName/history/*' element={< History />} />
+                    <Route path='/:cityName/history/:date' element={< History />} />
+                    <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
+                    <Route path='/savedEvents' element={< SportEventsList/>} />
+                </Routes>
             </div>
-            <Routes>
-                <Route path='/:cityName/current' element={< CurrentWeather />} />
-                <Route path='/:cityName/forecast' element={< ForecastList />} />
-                <Route path='/:cityName/history/*' element={< History />} />
-                <Route path='/:cityName/sportEvents' element={< SportEventsList />} />
-                <Route path='/savedEvents' element={< SportEventsList/>} />
-            </Routes>
         </div>
     )
 }

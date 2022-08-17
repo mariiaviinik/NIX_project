@@ -13,7 +13,7 @@ import { addFavouriteCityAction } from '../../Store/User/actions';
 export const CityAutocomplete = ({text}) => {
 
   const AutocompleteDt = useSelector(selectAutocompleteDt);
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const [inputVal, setInputVal] = useState('');
 
 
@@ -62,6 +62,7 @@ export const CityAutocomplete = ({text}) => {
         autoComplete='off'
       /> */}
       <input
+      className='search'
         type='text'
         value={inputVal}
         placeholder={text}
@@ -73,14 +74,17 @@ export const CityAutocomplete = ({text}) => {
       {
         isComponentVisible
         ?
-        <ul className='search'>
+        <ul className='search-list'>
           {
             AutocompleteDt.map((option) => { 
               return (
                 <li key={option.id} >
-                  <ListItemText onClick={onLiClick}  id={option.id} primary={[option.name, option.region, option.country].join(', ')} />
+                  <ListItemText 
+                    onClick={onLiClick}  
+                    id={option.id} 
+                    primary={[option.name, option.region ? option.region : null, option.country].filter(Boolean).join(', ')} 
+                  />
                   <Button onClick={()=>{addFavCity(option.name)}}>Add</Button>
-                  {/* <button onClick={() => {addFavCity(option.name)}}>add</button> */}
                 </li>
               );
             })

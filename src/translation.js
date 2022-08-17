@@ -1,5 +1,10 @@
 export const translation = {
     ua: {
+        mainPage: {
+            caption: 'Ваші обрані міста',
+            welcome: 'Вітаю у додатку SPORT&WEATHER APP',
+            text: ['Після реєстрації вам доступна інформація про прогноз погоди та спортивні події.', 'Для того щоб знайти інформацію, яка вас цікавить, введіть місто в пошуковій графі.'],
+        },
         header: {
             search: 'Пошук міста',
             current: 'Поточна погода',
@@ -39,9 +44,9 @@ export const translation = {
             place: 'Місце',
             time: 'Час',
             type: [
-                'Футбол',
-                'Крікет',
-                'Гольф'
+                'ФУТБОЛ',
+                'КРІКЕТ',
+                'ГОЛЬФ'
             ]
         },
         measure: {
@@ -54,6 +59,11 @@ export const translation = {
         }
     },
     en: {
+        mainPage: {
+            caption: 'Your favourite cities',
+            welcome: 'WELCOME TO SPORT&WEATHER APP',
+            text: ['After registration, you can access information about the weather forecast and sports events.', 'In order to find the information you are interested in, enter the city in the search field.'],
+        },
         header: {
             search: 'Search city',
             current: 'Current weather',
@@ -93,9 +103,9 @@ export const translation = {
             place: 'Place',
             time: 'Time',
             type: [
-                'Football',
-                'Cricket',
-                'Golf'
+                'FOOTBALL',
+                'CRICKET',
+                'GOLF'
             ]
         },
         measure: {

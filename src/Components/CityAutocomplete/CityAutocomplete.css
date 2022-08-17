@@ -1,19 +1,33 @@
 .search{
+    width: 500px;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    z-index: 10;
+}
+.search-list{
+    border: 1px solid black;
+    border-top: none;
+    box-sizing: border-box;
+    width: 500px;
     display: block;
     position: absolute;
+    top: -1;
     z-index: 10;
     padding: 0;
     margin-Top: 0;
     background-color: white;
+    width: 500px;
 }
-
-.search>li{
+.search-list>li{
     display: flex;
     align-items: center;
-    padding: 2px;
+    padding: 4px 10px;
 }
-
-.search>li:hover{
+.search-list>li:hover{
     background-color: rgb(221, 218, 218);
     cursor: pointer;
 }

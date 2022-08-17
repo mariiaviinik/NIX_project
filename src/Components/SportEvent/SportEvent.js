@@ -4,6 +4,7 @@ import {
     TableCell,
     Button,
 } from '@mui/material';
+import './SportEvent.css';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -46,9 +47,13 @@ export const SportEvent = ({ dt, typeIndex }) => {
                                 {
                                     cityName
                                     ?
-                                    <Button onClick={()=>{onEventSave(sportEvent, typeIndex)}}>Add</Button>
+                                    <button onClick={()=>{onEventSave(sportEvent, typeIndex)}} className={'button'}>
+                                        <b>ADD</b>
+                                    </button>
                                     :
-                                    <Button onClick={()=>{onEventDelete(typeIndex, index)}}>Delete</Button>
+                                    <button onClick={()=>{onEventDelete(typeIndex, index)}} className={'button'}>
+                                        <b>DELETE</b>
+                                    </button>
                                 }
                             </TableCell>
                         </TableRow>

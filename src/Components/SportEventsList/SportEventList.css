@@ -1,0 +1,35 @@
+.caption{
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.caption>h1 {
+    position: relative;
+}
+.caption>h1:after {
+    padding:0;
+    margin:0;
+    content: "";
+    width:50%;
+    height:0.8px;
+    background-color:white;
+    position: absolute;
+    right:-10px;
+    top:-1px;
+}
+.caption>h1:before {
+    padding:0;
+    margin:0;
+    content: "";
+    width:50%;
+    height:1.1px;
+    background-color:white;
+    position: absolute;
+    left:-10px;
+    bottom:-1px;
+}
+.m-b-20{
+    margin-bottom: 20px;
+}
