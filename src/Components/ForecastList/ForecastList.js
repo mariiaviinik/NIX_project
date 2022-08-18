@@ -56,7 +56,7 @@ export const ForecastList = () => {
                             index={index}
                             currentDate={item.date}
                             weather={item.day}
-                            byHour={item.hour}
+                            byHours={item.hour}
                         />
                     );
                 })

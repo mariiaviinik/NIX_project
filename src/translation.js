@@ -34,6 +34,8 @@ export const translation = {
             }
         },
         current: {
+            time: 'Час',
+            temperature: 'Температура',
             feelsLike: 'Відчувається як',
             wind: 'Вітер',
             gust: 'Пориви вітру',
@@ -94,6 +96,8 @@ export const translation = {
             }
         },
         current: {
+            time: 'Time',
+            temperature: 'Temperature',
             feelsLike: 'Feels like',
             wind: 'Wind',
             gust: 'Gust',

@@ -1,0 +1,10 @@
+.hour{
+    border-bottom: 0.8px solid grey;
+}
+.hour>td{
+    text-align: center;
+}
+.hour-weather-icon{
+    width: 40px;
+    height: 40px;
+}

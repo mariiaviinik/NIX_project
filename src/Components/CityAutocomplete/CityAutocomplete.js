@@ -63,7 +63,7 @@ export const CityAutocomplete = ({text}) => {
       {
         isComponentVisible
         ?
-        <ul className={'search-list '+currentTheme}>
+        <ul className={'search-list '+ currentTheme}>
           {
             AutocompleteDt.map((option) => { 
               return (
