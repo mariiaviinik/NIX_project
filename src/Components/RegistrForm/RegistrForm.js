@@ -22,7 +22,7 @@ export const RegistrForm = () => {
 
     const [userCode, setUserCode] = useState('');
     const [email, setEmail] = useState(); 
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState('');
     const [name, setName] = useState();
     const [surname, setSurname] = useState();
     const [password, setPassword] = useState();
@@ -49,7 +49,17 @@ export const RegistrForm = () => {
         setEmail(e.target.value);
     }, [setEmail])
 
-    const onPhoneChange = useCallback((e) => {
+    const onPhoneChange = useCallback((e, phone) => {
+        let val = e.target.value;
+        let condition = true;
+        for (let i=0; i<val.length; i++) {
+            if(i != 0 && val[i] == '+'){
+                condition = false;
+            }
+        }
+        if(!condition){
+            e.target.value=phone;
+        }
         setPhone(e.target.value);
     }, [setPhone])
 
@@ -104,9 +114,10 @@ export const RegistrForm = () => {
                                 <TextField
                                     variant="standard"
                                     required
+                                    val={phone}
                                     label={lang['phone']}
                                     type='phone'
-                                    onChange={onPhoneChange}
+                                    onChange={(e)=>{onPhoneChange(e, phone)}}
                                     style={inputStyle}
                                 />
                                 <TextField
