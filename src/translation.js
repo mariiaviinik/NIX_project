@@ -66,7 +66,7 @@ export const translation = {
             _in: ' дюйма',
         },
         button: {
-            add: 'Додати',
+            add: 'Зберегти',
             delete: 'Видалити',
         }
     },
@@ -137,7 +137,7 @@ export const translation = {
             _in: ' inch',
         },
         button: {
-            add: 'ADD',
+            add: 'SAVE',
             delete: 'DELETE',
         }
     }
