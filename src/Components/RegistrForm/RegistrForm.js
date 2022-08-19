@@ -53,7 +53,7 @@ export const RegistrForm = () => {
         let val = e.target.value;
         let condition = true;
         for (let i=0; i<val.length; i++) {
-            if(i != 0 && val[i] == '+'){
+            if(i !== 0 && val[i] === '+'){
                 condition = false;
             }
         }
