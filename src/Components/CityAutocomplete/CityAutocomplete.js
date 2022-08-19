@@ -11,12 +11,11 @@ import { getAutocompleteDt } from '../../Store/Autocomplete/thunks';
 import { addFavouriteCityAction } from '../../Store/User/actions';
 
 
-export const CityAutocomplete = ({text}) => {
+export const CityAutocomplete = ({text, buttonText}) => {
   const currentTheme = useSelector(selectTheme);
   const AutocompleteDt = useSelector(selectAutocompleteDt);
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const [inputVal, setInputVal] = useState('');
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +72,7 @@ export const CityAutocomplete = ({text}) => {
                     id={option.id} 
                     primary={[option.name, option.region ? option.region : null, option.country].filter(Boolean).join(', ')} 
                   />
-                  <Button onClick={()=>{addFavCity(option.name, option.id)}}>Add</Button>
+                  <Button onClick={()=>{addFavCity(option.name, option.id)}}>{buttonText['add']}</Button>
                 </li>
               );
             })

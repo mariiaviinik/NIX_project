@@ -4,7 +4,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { SettingsList } from '../SettingsList/SettingsList'
 
 export const Settings = () => {
-
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDrawer = useCallback((open) => {
@@ -14,6 +13,7 @@ export const Settings = () => {
     return(
         <div>
             <Button
+                sx={{marginLeft: 2}}
                 size="large"
                 color="inherit"
                 onClick={() => toggleDrawer(true)}

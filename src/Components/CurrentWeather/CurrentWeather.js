@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import {
@@ -12,7 +12,6 @@ import {
 import './CurrentWeather.css';
 import { selectCurrentWeather, selectIsLoadingCurrent } from '../../Store/Forecast/selectors';
 import { getWeatherForecast } from '../../Store/Forecast/thunks';
-import { translation } from '../../translation';
 import { selectLang } from '../../Store/User/selectors';
 
 
@@ -20,14 +19,10 @@ export const CurrentWeather = () =>{
     const isLoadingCurrent = useSelector(selectIsLoadingCurrent);
     const currentWeather = useSelector(selectCurrentWeather);
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['current']);
+    const lang = language['current'];
 
     const date = currentWeather?.last_updated?.split(' ');
     const {cityName} = useParams();
-
-    useEffect(()=>{
-        setLang(translation[language]['current'])
-    }, [setLang, language]);
 
     const dispatch = useDispatch();
 

@@ -15,8 +15,9 @@ export const getSportEventsSuccessAction = (data) => {
     };
 }
 
-export const getSportEventsFailureAction = () => {
+export const getSportEventsFailureAction = (error) => {
     return {
         type: GET_SPORT_EVENTS_FAILURE_ACTION,
+        error
     };
 }

@@ -10,27 +10,21 @@ import {
     Select,
     MenuItem
 } from '@mui/material';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { translation } from '../../translation';
 import { changeLogStatusAction } from '../../Store/User/actions';
-import { selectUserContacts, selectTheme, selectLang, selectSystem } from '../../Store/User/selectors';
+import { selectUserContacts, selectTheme, selectLang, selectLangName, selectSystem } from '../../Store/User/selectors';
 import { changeThemeAction, changeLanguageAction, changeSystemAction } from '../../Store/User/actions';
 
 
 export const SettingsList = ({ onBoxClick }) => {
     const user = useSelector(selectUserContacts);
+    const [langName, setLangName] = useState(useSelector(selectLangName));
     const language = useSelector(selectLang);
+    const lang = language['settings'];
     const currentTheme = useSelector(selectTheme);
     const currentSystem = useSelector(selectSystem);
-
-    const [lang, setLang]  = useState(translation[language]['settings']);
-    const [selectThemeVal, setSelectThemeVal] = useState(language);
-
-    useEffect(()=>{
-        setLang(translation[language]['settings'])
-    }, [setLang, language]);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -46,9 +40,9 @@ export const SettingsList = ({ onBoxClick }) => {
     }, [navigate, onBoxClick, user.id]);
 
     const onLanguageChange = useCallback((e) => {
-        setSelectThemeVal(e.target.value);
+        setLangName(e.target.value);
         dispatch(changeLanguageAction(e.target.value));
-    }, [dispatch, setSelectThemeVal])
+    }, [dispatch, setLangName])
 
     const changeThemeMode = useCallback((e) => {
         const theme = e.target.checked ? 'dark' : 'light';
@@ -85,7 +79,7 @@ export const SettingsList = ({ onBoxClick }) => {
                     <Select
                         labelId="select"
                         id="select"
-                        value={selectThemeVal}
+                        value={langName}
                         onChange={onLanguageChange}
                     >
                         <MenuItem value={'en'} >English</MenuItem>

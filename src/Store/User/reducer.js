@@ -23,7 +23,7 @@ const initialState = {
 export const userReducer = (state=initialState, action) => {
     switch(action.type){
         case SET_USER_DT_ACTION:
-            return {...state}
+            return {...state, contacts: action.data}
         case ADD_FAVOURITE_CITY_ACTION:
             const arr = state.settings.cities.filter((city)=> action.city.id === city.id);
             if(arr.length) return {...state};

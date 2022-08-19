@@ -7,6 +7,7 @@ import {
 const initialState = {
     isLoadingHistory: false,
     weatherHistoryDt: [],
+    error: null,
 }
 
 export const historyReducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ export const historyReducer = (state = initialState, action) => {
             return{...state,
                 isLoadingHistory: false,
                 weatherHistoryDt: action.data.forecast.forecastday,
+            }
+        case GET_WEATHER_HISTORY_FAILURE_ACTION:
+            return{...state,
+                error: action.error,
             }
         default: return state;
     }

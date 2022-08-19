@@ -1,18 +1,11 @@
 import './ForecastItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-    Table,
-    TableBody,
-    TableRow,
-    TableCell,
-    Paper,
-} from '@mui/material';
+import { Paper } from '@mui/material';
 import { getMonthName } from '../getMonth';
 import { Hours } from '../Hours/Hours';
 import { measuringSystem } from '../../measure';
 import { selectSystem } from '../../Store/User/selectors';
-import { translation } from '../../translation';
 import { selectLang } from '../../Store/User/selectors';
 
 
@@ -30,11 +23,7 @@ export const ForecastItem = ({ index, currentDate, weather, byHours}) => {
     const currentSystem = useSelector(selectSystem);
     const [mesureType, setMeasureType] = useState(measuringSystem[currentSystem]);
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['measure']);
-
-    useEffect(()=>{
-        setLang(translation[language]['measure'])
-    }, [setLang, language]);
+    const lang = language['measure'];
 
     useEffect(()=>{
         setMeasureType(measuringSystem[currentSystem])

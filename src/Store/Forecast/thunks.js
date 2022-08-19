@@ -17,9 +17,12 @@ export const getWeatherForecast = (city) => {
 
                 if(response.ok){
                     const data = await response.json();
-                    // console.log(data);
                     dispatch(getWeatherForecastSuccessAction(data));
+                } else{
+                    dispatch(getWeatherForecastFailureAction('Error happened'));
                 }
+            } else{
+                dispatch(getWeatherForecastFailureAction('No city error'));
             }
         } catch(error){
             dispatch(getWeatherForecastFailureAction(error));

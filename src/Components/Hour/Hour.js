@@ -1,7 +1,6 @@
 import './Hour.css'
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { translation } from '../../translation';
 import { selectLang } from '../../Store/User/selectors';
 import { measuringSystem } from '../../measure';
 import { selectSystem } from '../../Store/User/selectors';
@@ -9,19 +8,13 @@ import { selectSystem } from '../../Store/User/selectors';
 export const Hour = ({ dt }) => {
     const date = dt?.time?.split(' ');
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['current']);
-    const [measureLang, setMeasureLang] = useState(translation[language]['measure']);
+    const measureLang = language['measure'];
     const currentSystem = useSelector(selectSystem);
     const [mesureType, setMeasureType] = useState(measuringSystem[currentSystem]);
 
     useEffect(()=>{
         setMeasureType(measuringSystem[currentSystem])
     }, [setMeasureType, currentSystem])
-
-    useEffect(()=>{
-        setLang(translation[language]['current'])
-        setMeasureLang(translation[language]['measure']);
-    }, [setLang, setMeasureLang, language]);
 
     return(
         <tr className='hour'>

@@ -1,8 +1,7 @@
 import './Header.css' ;
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { translation } from '../../translation';
 import logo from '../../img/logo.PNG';
 import { selectLang, selectUserContacts, selectTheme } from '../../Store/User/selectors';
 import { selectCurrentCity } from '../../Store/Forecast/selectors';
@@ -21,23 +20,19 @@ export const Header = () => {
     const currentTheme = useSelector(selectTheme);
     const user = useSelector(selectUserContacts);
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['header']);
+    const lang = language['header'];
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        setLang(translation[language]['header'])
-    }, [setLang, language]);
-
     const onCityClick = useCallback((e)=>{
         let inputVal = e.target.innerText.split(", ").shift();
-        navigate('/user/' + user.id + '/' + inputVal + '/current');
-    }, [navigate, user.id])
+        navigate('/user/' + user?.id + '/' + inputVal + '/current');
+    }, [navigate, user?.id])
 
     return (
         <div>
             {
-                user.login
+                user?.login && user?.id
                 ?
                 <div>
                     <div className={"header " + currentTheme}>
@@ -45,7 +40,7 @@ export const Header = () => {
                             <img src={logo} className='image' alt='logo' />
                         </div>
                         <div className='flex'>
-                            < CityAutocomplete text={lang['search']} />
+                            < CityAutocomplete text={lang['search']} buttonText={language['button']} />
                             < Settings />
                         </div>
                     </div>

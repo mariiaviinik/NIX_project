@@ -16,8 +16,9 @@ export const getAutocompleteDtSuccessAction = (data) => {
     };
 }
 
-export const getAutocompleteDtFailureAction = () => {
+export const getAutocompleteDtFailureAction = (error) => {
     return {
         type: GET_AUTOCOMPLETE_DT_FAILURE_ACTION,
+        error
     };
 }

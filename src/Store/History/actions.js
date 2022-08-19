@@ -15,8 +15,9 @@ export const getWeatherHistorySuccessAction = (data) => {
     };
 }
 
-export const getWeatherHistoryFailureAction = () => {
+export const getWeatherHistoryFailureAction = (error) => {
     return {
         type: GET_WEATHER_HISTORY_FAILURE_ACTION,
+        error
     };
 }

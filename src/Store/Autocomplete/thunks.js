@@ -17,6 +17,8 @@ export const getAutocompleteDt = (str) => {
             if(response.ok){
                 const data = await response.json();
                 dispatch(getAutocompleteDtSuccessAction(data));
+            }else{
+                dispatch(getAutocompleteDtFailureAction('Error happened'))
             }
         } catch(error){
             dispatch(getAutocompleteDtFailureAction(error));

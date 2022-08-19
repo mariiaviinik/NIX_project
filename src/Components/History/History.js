@@ -1,10 +1,11 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { getWeatherHistory } from '../../Store/History/thunks';
+import { selectLang } from '../../Store/User/selectors';
 import { ForecastList } from '../ForecastList/ForecastList';
 import { setCurrentCityAction } from '../../Store/Forecast/actions';
 
@@ -13,6 +14,9 @@ export const History = () => {
     const date = useParams()['*'];
     const [dateVal, setDateVal] = useState(date ? date : dayjs());
     const {cityName} = useParams();
+
+    const language = useSelector(selectLang);
+    const lang = language['history'];
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -27,7 +31,7 @@ export const History = () => {
         const today = dayjs();
         const difference = today.diff(e, 'day');
         if(difference>7 || difference<1){
-            alert('');
+            alert(lang['notice']);
         } else{
             setDateVal(e);
             const date = e.format('YYYY-MM-DD');
@@ -36,7 +40,7 @@ export const History = () => {
             }
             navigate(date);
         }
-    }, [navigate, dispatch, cityName]);
+    }, [navigate, dispatch, cityName, lang]);
 
     return(
         <div className='centralize-column column'>

@@ -7,6 +7,7 @@ import {
 const initialState = {
     isLoadingSportList: false,
     sportEventsDT: [],
+    error: null,
 }
 
 export const sportReducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ export const sportReducer = (state = initialState, action) => {
             return{...state,
                 isLoadingSportList: false,
                 sportEventsDT: [action.data.football, action.data.cricket, action.data.golf],
+            }
+        case GET_SPORT_EVENTS_FAILURE_ACTION:
+            return{...state,
+                error: action.error,
             }
         default: return state;
     }

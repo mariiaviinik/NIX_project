@@ -9,7 +9,6 @@ import {
     CircularProgress
 } from '@mui/material';
 import './SportEventList.css';
-import { translation } from '../../translation';
 import { selectSportEvents, selectIsLoadingSportList } from '../../Store/Sport/selectors';
 import { getSportEvents } from '../../Store/Sport/thunks';
 import { setCurrentCityAction } from '../../Store/Forecast/actions';
@@ -26,11 +25,7 @@ export const SportEventsList = () => {
     const {cityName} = useParams();
 
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['sportEvents']);
-
-    useEffect(()=>{
-        setLang(translation[language]['sportEvents'])
-    }, [setLang, language]);
+    const lang = language['sportEvents'];
 
     useEffect(()=>{
         if(cityName){

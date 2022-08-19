@@ -1,23 +1,17 @@
 import './FavCities.css';
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { translation } from '../../translation';
 import { ListItemText, ListItem, Divider } from '@mui/material';
 import { selectFavCities } from '../../Store/User/selectors';
 import { deleteFavouriteCityAction } from '../../Store/User/actions';
 import { selectLang, selectTheme } from '../../Store/User/selectors';
-import { useNavigate } from "react-router-dom";
 
 
 export const FavCities = ({ onLiClick }) => {
     const currentTheme = useSelector(selectTheme);
     const cities = useSelector(selectFavCities);
     const language = useSelector(selectLang);
-    const [lang, setLang]  = useState(translation[language]['mainPage']);
-
-    useEffect(()=>{
-        setLang(translation[language]['mainPage'])
-    }, [setLang, language]);
+    const lang = language['mainPage'];
 
     const dispatch = useDispatch();
 
@@ -42,7 +36,7 @@ export const FavCities = ({ onLiClick }) => {
                       <ListItem sx={{width: 310}}  >
                         <ListItemText onClick={onLiClick} primary={city.name} />
                         <button onClick={()=>{onCityDelete(city.id)}} className={'button'}>
-                            <b>DELETE</b>
+                            <b>{language['button']['delete']}</b>
                         </button>
                       </ListItem >
                       <Divider />

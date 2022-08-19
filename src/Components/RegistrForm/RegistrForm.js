@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@mui/material';
-import { translation } from '../../translation';
+import { selectLang } from '../../Store/User/selectors';
 import { setUserDtAction, changeLogStatusAction} from '../../Store/User/actions';
 import { selectUserContacts } from '../../Store/User/selectors';
 
@@ -17,7 +17,8 @@ export const RegistrForm = () => {
     const registrationCode = '1111';
     const user = useSelector(selectUserContacts);
     const {form} = useParams();
-    const [lang, setLang] = useState(translation['en']['registration']);
+    const language = useSelector(selectLang);
+    const lang = language['registration'];
 
     const [userCode, setUserCode] = useState('');
     const [email, setEmail] = useState(); 
@@ -35,16 +36,7 @@ export const RegistrForm = () => {
         setUserCode(inputCode);
         if(inputCode.length === 4){
             if(registrationCode === inputCode){
-                dispatch(setUserDtAction(
-                    {contacts: obj,
-                    settings: {
-                        cities: [],
-                        savedSportEvents: [[], [], []],
-                        theme: 'light',
-                        lang: 'en',
-                        system: 'metric',
-                    }}
-                ))
+                dispatch(setUserDtAction(obj));
                 navigate('/user');
             } else {
                 alert('Wrong code number');
@@ -165,7 +157,9 @@ export const RegistrForm = () => {
                                 />
                             </div>
                         }
-                        <Button id='login-btn' type='submit' variant="contained">Sign in</Button>
+                        <Button id='login-btn' type='submit' variant="contained">
+                            {form === 'registration' ? lang['registration'] : lang['signin']}
+                        </Button>
                     </form>
                 </div>
                 :

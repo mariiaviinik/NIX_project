@@ -1,6 +1,7 @@
 import { 
     GET_WEATHER_FORECAST_ACTION,
     GET_WEATHER_FORECAST_SUCCESS_ACTION,
+    GET_WEATHER_FORECAST_FAILURE_ACTION,
     SET_CURRENT_CITY_ACTION,
 } from './actions';
 
@@ -27,6 +28,10 @@ export const forecastReducer = (state = initialState, action) => {
                 weatherForecastDt: action.data.forecast.forecastday,
                 currentWeather: action.data.current,
                 currentCity: action.data.location.name,
+            }
+        case GET_WEATHER_FORECAST_FAILURE_ACTION:
+            return{...state,
+                error: action.error,
             }
         case SET_CURRENT_CITY_ACTION:
             return{...state,

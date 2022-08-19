@@ -17,6 +17,8 @@ export const getSportEvents = (city) => {
             if(response.ok){
                 const data = await response.json();
                 dispatch(getSportEventsSuccessAction(data));
+            } else {
+                dispatch(getSportEventsFailureAction('Error happened'));
             }
         } catch(error){
             dispatch(getSportEventsFailureAction(error));

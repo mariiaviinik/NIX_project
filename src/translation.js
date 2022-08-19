@@ -28,6 +28,8 @@ export const translation = {
             surname: 'Прізвище',
             phone: 'Телефон',
             password: 'Пароль',
+            signin: 'Увійти',
+            registration: 'Зареєструватися',
             links: {
                 login: 'Вхід',
                 registr: 'Зареєструватись'
@@ -40,6 +42,9 @@ export const translation = {
             wind: 'Вітер',
             gust: 'Пориви вітру',
             pressure: 'Тиск',
+        },
+        history:{
+            notice: 'Дата за межами доступних значень. Вибиріть іншу.',
         },
         sportEvents: {
             match: 'Матч',
@@ -59,6 +64,10 @@ export const translation = {
             _f: '°F',
             _mph: ' миль/год',
             _in: ' дюйма',
+        },
+        button: {
+            add: 'Додати',
+            delete: 'Видалити',
         }
     },
     en: {
@@ -90,6 +99,8 @@ export const translation = {
             surname: 'surname',
             phone: 'phone',
             password: 'password',
+            signin: 'Sign in',
+            registration: 'Registration',
             links: {
                 login: 'Log in',
                 registr: 'Registration'
@@ -102,6 +113,9 @@ export const translation = {
             wind: 'Wind',
             gust: 'Gust',
             pressure: 'Pressure',
+        },
+        history:{
+            notice: 'Date out of range. Choose other date.',
         },
         sportEvents: {
             match: 'Match',
@@ -121,6 +135,10 @@ export const translation = {
             _f: '°F',
             _mph: ' mph',
             _in: ' inch',
+        },
+        button: {
+            add: 'ADD',
+            delete: 'DELETE',
         }
     }
 }
